@@ -1,7 +1,19 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <ItemGroup>
+    <None Remove="trayicon.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Hardcodet.NotifyIcon.Wpf" Version="1.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\NamedPipesExample.Common\NamedPipesExample.Common.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="trayicon.ico" />
   </ItemGroup>
 
   <PropertyGroup>
