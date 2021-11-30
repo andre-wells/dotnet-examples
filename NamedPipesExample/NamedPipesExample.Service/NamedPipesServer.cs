@@ -2,7 +2,7 @@ using H.Pipes;
 using H.Pipes.Args;
 using NamedPipesExample.Common;
 
-namespace NamedPipesSample.WindowsService;
+namespace NamedPipesExample.Service;
 
 public class NamedPipesServer : IAsyncDisposable
 {
@@ -48,7 +48,7 @@ public class NamedPipesServer : IAsyncDisposable
     private void OnMessageReceived(PipeMessage? message)
     {
         ArgumentNullException.ThrowIfNull(nameof(message));
-        switch (message.Action)
+        switch (message!.Action)
         {
             case ActionType.SendText:
                 Console.WriteLine($"Text from client: {message.Text}");
@@ -64,6 +64,11 @@ public class NamedPipesServer : IAsyncDisposable
                 Console.WriteLine($"Unknown Action Type: {message.Action}");
                 break;
         }
+    }
+
+    private void OnExceptionOccurred(Exception ex)
+    {
+        Console.WriteLine($"Exception occured in pipe: {ex}");
     }
 
     #region Dispose Implementation
