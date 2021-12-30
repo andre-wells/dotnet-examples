@@ -25,8 +25,6 @@ public record PersonRecord
 {
     public string FirstName { get; set; } = string.Empty;
     public string LastName { get; set; } = string.Empty;
-
-    public override string ToString() => $"'{FirstName} {LastName}'";
 }
 
 /// <summary>
@@ -59,7 +57,7 @@ public record SuperPerson : ImmutablePersonRecord
 
 class Demo
 {
-    internal static void PerformDemo()
+    internal static void CreateAndCopy()
     {
         // Before C# 9, you would represent new state like this
         // This is called "non-desctructive mutation"
@@ -127,4 +125,27 @@ class Demo
         var superPersonCopy = superPerson with { Speed = 50 };
         Console.WriteLine(superPersonCopy);
     }
+
+    internal static void ComparingRecords()
+    {
+        Console.WriteLine();
+        Console.WriteLine("");
+
+        var person = new ImmutablePersonRecord()
+        {
+            FirstName = "Tony",
+            LastName = "Stark"
+        };
+
+        var newPerson = person with { FirstName = "Howard" };
+
+        Console.WriteLine($"Object.ReferenceEquals: {Object.ReferenceEquals(person, newPerson)}"); // false
+        Console.WriteLine($"Object.Equals: {Object.Equals(person, newPerson)}"); // false
+
+        var anotherPerson = newPerson with { FirstName = "Tony" };
+        Console.WriteLine($"Object.Equals {Object.Equals(person, anotherPerson)}"); // true
+        Console.WriteLine($"== operator {person == anotherPerson}"); // true
+
+    }
+
 }

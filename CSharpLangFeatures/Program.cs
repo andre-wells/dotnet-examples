@@ -1,3 +1,4 @@
 ﻿// See https://aka.ms/new-console-template for more information
 Console.WriteLine("Record Types: ");
-RecordTypes.Demo.PerformDemo();
+RecordTypes.Demo.CreateAndCopy();
+RecordTypes.Demo.ComparingRecords();
