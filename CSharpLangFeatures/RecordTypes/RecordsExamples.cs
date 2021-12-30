@@ -46,7 +46,16 @@ public struct PersonStruct
     public override string ToString() => $"'{FirstName} {LastName}'";
 }
 
-public record DefaultImmutabilityOneLine(string FirstName, string LastName);
+/// <summary>
+/// To achieve default immutability, you can create objects by using positional arguments (constructor-like syntax). 
+/// When you do this, you can declare records with one line
+/// </summary>
+public record DefaultImmutabilityPositionalArguments(string FirstName, string LastName, int Id);
+
+public record SuperPerson : ImmutablePersonRecord
+{
+    public int Speed { get; init; }
+}
 
 class Demo
 {
@@ -67,7 +76,7 @@ class Demo
         Console.WriteLine(st1);
         Console.WriteLine(st2);
 
-        
+
         // The same doesn't happen with PersonRecord
         // See how changing rec1 affects rec2. 
         Console.WriteLine();
@@ -86,24 +95,36 @@ class Demo
         //With Records, we can make use of `with`.
         Console.WriteLine();
         Console.WriteLine("Immutable Records `with` Test");
-        var person = new ImmutablePersonRecord
+        var immutablePerson = new ImmutablePersonRecord
         {
             FirstName = "Tony",
             LastName = "Stark",
 
         };
 
-        var newPerson = person with { FirstName = "Howard" };
-        Console.WriteLine(person);
-        Console.WriteLine(newPerson);
+        var newImmutablePerson = immutablePerson with { FirstName = "Howard" };
+        Console.WriteLine(immutablePerson);
+        Console.WriteLine(newImmutablePerson);
 
 
         Console.WriteLine();
         Console.WriteLine("Default Immutable Records `with` Test");
-        var personDefault = new DefaultImmutabilityOneLine("Tony","Stark");
+        var defaultImmutablePerson = new DefaultImmutabilityPositionalArguments("Tony", "Stark", 1);
 
-        var newPersonDefault = personDefault with { FirstName = "Howard" };
-        Console.WriteLine(personDefault);
-        Console.WriteLine(newPersonDefault);
+        var newDefaultImmutablePerson = defaultImmutablePerson with { FirstName = "Howard", Id = 2 };
+        Console.WriteLine(defaultImmutablePerson);
+        Console.WriteLine(newDefaultImmutablePerson);
+
+        // A big deal is that records support inheritance where structs do not.
+        Console.WriteLine();
+        Console.WriteLine("Inheritance with Records");
+        var superPerson = new SuperPerson
+        {
+            FirstName = "Tony",
+            LastName = "Stark",
+            Speed = 100
+        };
+        var superPersonCopy = superPerson with { Speed = 50 };
+        Console.WriteLine(superPersonCopy);
     }
 }
