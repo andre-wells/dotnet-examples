@@ -1,3 +1,4 @@
+namespace InitOnly;
 class ReadOnlyProperties
 {
 
@@ -22,5 +23,5 @@ class InitAccessor
     {
         FirstName = "a",
         LastName = "b"
-    };    
+    };
 }
