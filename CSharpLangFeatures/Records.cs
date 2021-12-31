@@ -1,5 +1,3 @@
-namespace RecordTypes;
-
 // What do you get with immutable types? First, you get simplicity. 
 // An immutable object only has one state, the state you specified when you created the object. 
 // You’ll also see that they are secure and thread-safe with no required synchronization. 
@@ -55,7 +53,7 @@ public record SuperPerson : ImmutablePersonRecord
     public int Speed { get; init; }
 }
 
-class Demo
+class RecordsDemo
 {
     internal static void CreateAndCopy()
     {
