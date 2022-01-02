@@ -1,32 +1,3 @@
-// What do you get with immutable types? First, you get simplicity. 
-// An immutable object only has one state, the state you specified when you created the object. 
-// You’ll also see that they are secure and thread-safe with no required synchronization. 
-// Because you don’t have threads fighting to change an object, 
-// they can be shared freely in your applications.
-
-// A record is a construct that allows you to encapsulate property state.
-// Records allow you to perform value-like behaviors on properties
-
-// How is this different than structs? Records are offering the following advantages:
-
-// - An easy, simplified construct whose intent is to use as an immutable data structure 
-//   with easy syntax, like `with` expressions to copy objects
-// - Robust equality support with Equals(object), IEquatable<T>, and GetHashCode()
-// - Constructor/deconstructor support with simplified positional (constructor-based) records
-
-// Deciding when to use Struct, Record or Class:
-
-// Does your data type respect ALL of these rules?
-// - It logically represents a single value, similar to primitive types (int, double, etc.).
-// - It has an instance size under 16 bytes.
-// - It is immutable.
-// - It will not have to be boxed frequently.
-// If YES then it should be a struct.  If NO then it should be a reference type.
-
-// Does your data type encapsulate some sort of a complex value? 
-// Is the value immutable? Do you use it in unidirectional (one way) flow?
-// If YES then go with Record. If NO then go with Class.
-
 /// <summary>
 /// When you mark a type as record like this, it won’t give you immutability on its own;
 /// you’ll need to use init
@@ -160,4 +131,8 @@ class RecordsDemo
 
     }
 
+    internal static void CopyAndShallowCopy()
+    {
+        
+    }
 }
