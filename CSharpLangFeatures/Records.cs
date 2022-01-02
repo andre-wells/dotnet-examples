@@ -14,6 +14,18 @@
 // - Robust equality support with Equals(object), IEquatable<T>, and GetHashCode()
 // - Constructor/deconstructor support with simplified positional (constructor-based) records
 
+// Deciding when to use Struct, Record or Class:
+
+// Does your data type respect ALL of these rules?
+// - It logically represents a single value, similar to primitive types (int, double, etc.).
+// - It has an instance size under 16 bytes.
+// - It is immutable.
+// - It will not have to be boxed frequently.
+// If YES then it should be a struct.  If NO then it should be a reference type.
+
+// Does your data type encapsulate some sort of a complex value? 
+// Is the value immutable? Do you use it in unidirectional (one way) flow?
+// If YES then go with Record. If NO then go with Class.
 
 /// <summary>
 /// When you mark a type as record like this, it won’t give you immutability on its own;
@@ -52,6 +64,8 @@ public record SuperPerson : ImmutablePersonRecord
 {
     public int Speed { get; init; }
 }
+
+public record Foo(List<string> l);
 
 class RecordsDemo
 {
