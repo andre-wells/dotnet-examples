@@ -1,3 +1,5 @@
+using static System.Console;
+
 /// <summary>
 /// When you mark a type as record like this, it won’t give you immutability on its own;
 /// you’ll need to use init
@@ -36,7 +38,7 @@ public record SuperPerson : ImmutablePersonRecord
     public int Speed { get; init; }
 }
 
-public record Foo(List<string> l);
+public record ListRecord(int id, List<string> List);
 
 class RecordsDemo
 {
@@ -131,8 +133,25 @@ class RecordsDemo
 
     }
 
-    internal static void CopyAndShallowCopy()
+
+    /// <summary>
+    /// An assignment of a record is a shallow copy of the record. 
+    /// A copy by with expression of a record is neither a shallow nor a deep copy.
+    /// </summary>
+    internal static void ShallowCopy()
     {
-        
+        var foo = new ListRecord(1, new List<string>());
+        var fooAsShallowCopy = foo;
+        var fooAsWithCopy = foo with { }; // A syntactic sugar for new SomeRecord(foo.List);
+        var fooWithDifferentList = foo with { List = new List<string>() { "a", "b" } };
+        var differentFooWithSameList = new ListRecord(2, foo.List); // This is the same like foo with { };
+        foo.List.Add("a");
+
+        WriteLine($"{foo.id} - Count in foo: {foo.List.Count}"); // 1
+        WriteLine($"{fooAsShallowCopy.id} - Count in fooAsShallowCopy: {fooAsShallowCopy.List.Count}"); // 1
+        WriteLine($"{fooWithDifferentList.id} - Count in fooWithDifferentList: {fooWithDifferentList.List.Count}"); // 2
+        WriteLine($"{differentFooWithSameList.id} - Count in differentFooWithSameList: {differentFooWithSameList.List.Count}"); // 1
+        WriteLine($"{fooAsWithCopy.id} - Count in fooAsWithCopy: {fooAsWithCopy.List.Count}"); // 1
+        WriteLine("");
     }
 }

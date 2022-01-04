@@ -1,6 +1,6 @@
-# Dotnet Exampl- [C# Language Features](#c-language-features)
-  - [The `init` Accessor](#the-init-accessor)
-- [C# Language Features](#c-language-features)
+# Dotnet Examples
+
+- [C Sharp Language Features](#c-sharp-language-features)
   - [The `init` Accessor](#the-init-accessor)
   - [`record` Types](#record-types)
   - [Records as immutable types](#records-as-immutable-types)
@@ -9,7 +9,7 @@
   - [AsyncSocketServerExample](#asyncsocketserverexample)
   - [NamedPipesExample](#namedpipesexample)
 
-## C# Language Features
+## C Sharp Language Features
 
 ### The `init` Accessor
 
@@ -107,12 +107,13 @@ How is this different than structs? Records are offering the following advantage
 
 ### Deciding what type to use
 
+Courtesy of [this SO post](https://stackoverflow.com/questions/64816714/when-to-use-record-vs-class-vs-struct)
 With that being said, ask yourself these questions...
 
 **Does your data type respect *all* of these rules:**
 
 - It logically represents a single value, similar to primitive types (int, double, etc.).
-- It has an instance size under 16 bytes.
+- It has an instance size under 16 bytes (use `System.Runtime.InteropServices.Marshal.SizeOf(t)` to calculate)
 - It is immutable.
 - It will not have to be boxed frequently.
 
