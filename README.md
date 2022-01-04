@@ -2,9 +2,11 @@
 
 - [C Sharp Language Features](#c-sharp-language-features)
   - [The `init` Accessor](#the-init-accessor)
-  - [`record` Types](#record-types)
-  - [Records as immutable types](#records-as-immutable-types)
-  - [Deciding what type to use](#deciding-what-type-to-use)
+  - [The `record` Type](#the-record-type)
+    - [Records as immutable types](#records-as-immutable-types)
+    - [Deciding what type to use](#deciding-what-type-to-use)
+  - [Switch Expressions](#switch-expressions)
+  - [Pattern Matching](#pattern-matching)
 - [Feature and Implementation Examples](#feature-and-implementation-examples)
   - [AsyncSocketServerExample](#asyncsocketserverexample)
   - [NamedPipesExample](#namedpipesexample)
@@ -81,7 +83,7 @@ var person = new Person
 
 ```
 
-### `record` Types
+### The `record` Type
 
 A `struct`, a `class` and a `record` are user data types.
 
@@ -91,7 +93,7 @@ When you need some sort of hierarchy to describe your data types like inheritanc
 
 Records solve the problem when you want your type to be a value oriented by default. Records are reference types but with the value oriented semantic.
 
-### Records as immutable types
+#### Records as immutable types
 
 What do you get with immutable types? First, you get simplicity. An immutable object only has one state, the state you specified when you created the object. You’ll also see that they are secure and thread-safe with no required synchronization. Because you don’t have threads fighting to change an object, they can be shared freely in your applications.
 
@@ -105,7 +107,7 @@ How is this different than structs? Records are offering the following advantage
 - Robust equality support with `Equals(object)`, `IEquatable<T>`, and `GetHashCode()`
 - Constructor/deconstructor support with simplified positional (constructor-based) records
 
-### Deciding what type to use
+#### Deciding what type to use
 
 Courtesy of [this SO post](https://stackoverflow.com/questions/64816714/when-to-use-record-vs-class-vs-struct)
 With that being said, ask yourself these questions...
@@ -122,6 +124,40 @@ If **Yes**, it should be a struct.  If **No** It should be some reference type.
 **Does your data type encapsulate some sort of a complex value? Is the value immutable? Do you use it in unidirectional (one way) flow?**
 
 If **Yes**, it should be a record.  If **No** It should be a class.
+
+### Switch Expressions
+
+With switch expressions, we can replace `case` and `:` with `=>` and replace the default statement with a discard `_`. This gives us a much cleaner, expression-like syntax.
+
+Essentially, Switch statements produce go-to like control flow whereas the expressive style forces you to return a value.
+
+```c#
+public static string SwitchExpression(string languageInput)
+    {
+        string languagePhrase = languageInput switch
+        {
+            "C#" => "C# is fun!",
+            "JavaScript" => "JavaScript is mostly fun!",
+            _ => throw new Exception("You code in something else I don't recognize."),
+        };
+        return languagePhrase;
+    }
+```
+
+### Pattern Matching
+
+Pattern matching allows you to simplify scenarios where you need to cohesively manage data from different sources. An obvious example is when you call an external API where you don’t have any control over the types of data you are getting back.
+
+```c#
+        static decimal GetFuelCost(object vehicle) =>
+            vehicle switch
+            {
+                Vehicle s when s.FuelTankSize < 1000 => 10.00m,
+                Vehicle s when s.FuelTankSize <= 10000 => 7.00m,
+                Animal a => 200.00m,
+                _ => throw new ArgumentException("no idea")
+            };
+```
 
 ---
 

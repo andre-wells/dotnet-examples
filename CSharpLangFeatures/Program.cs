@@ -3,6 +3,6 @@
 //Console.WriteLine("Record Types: ");
 //RecordsDemo.CreateAndCopy();
 //RecordsDemo.ComparingRecords();
-RecordsDemo.ShallowCopy();
+//RecordsDemo.ShallowCopy();
 
-//PatternMatchingDemo.Run();
+PatternMatchingDemo.Run();

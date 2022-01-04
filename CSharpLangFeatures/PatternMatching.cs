@@ -1,5 +1,17 @@
 // Pattern matching works with the is operator and with switch
 
+class Vehicle
+{
+    public string Name { get; init; } = string.Empty;
+    public int FuelTankSize { get; init; }
+}
+
+class Animal
+{
+    public string Name { get; init; } = string.Empty;
+    public int Endurance { get; init; }
+}
+
 class PatternMatchingDemo
 {
     internal static void Run()
@@ -10,6 +22,12 @@ class PatternMatchingDemo
             FuelTankSize = 45
         };
 
+        var a = new Animal
+        {
+            Name = "Battle Cat",
+            Endurance = 50
+        };
+
         // Using switch expressions, we can apply a `when` for a case acting on the object.
         // Note how we use Object as an input and do a cast.
         // This came in C# 8
@@ -18,6 +36,7 @@ class PatternMatchingDemo
             {
                 Vehicle s when s.FuelTankSize < 1000 => 10.00m,
                 Vehicle s when s.FuelTankSize <= 10000 => 7.00m,
+                Animal a => 200.00m,
                 _ => throw new ArgumentException("no idea")
             };
 
@@ -41,14 +60,10 @@ class PatternMatchingDemo
             _ => 12.00m
         };                
 
-        Console.WriteLine(GetFuelCostWithPatternMatch(v));
-        Console.WriteLine(GetFuelCostWithRelationalPattern(v));
-        Console.WriteLine(GetFuelCostWithLogicalPattern(v));
+        Console.WriteLine($"GetFuelCostWithPatternMatch (vehicle) {GetFuelCostWithPatternMatch(v)}");
+        Console.WriteLine($"GetFuelCostWithPatternMatch (animal) {GetFuelCostWithPatternMatch(a)}");
+        Console.WriteLine($"GetFuelCostWithRelationalPattern {GetFuelCostWithRelationalPattern(v)}");
+        Console.WriteLine($"GetFuelCostWithLogicalPattern {GetFuelCostWithLogicalPattern(v)}");
     }
 }
 
-class Vehicle
-{
-    public string Name { get; init; } = string.Empty;
-    public int FuelTankSize { get; init; }
-}
