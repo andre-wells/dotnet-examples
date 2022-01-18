@@ -7,6 +7,10 @@
     - [Deciding what type to use](#deciding-what-type-to-use)
   - [Switch Expressions](#switch-expressions)
   - [Pattern Matching](#pattern-matching)
+  - [Improved target typing](#improved-target-typing)
+    - [Target-typed new expressions](#target-typed-new-expressions)
+    - [Target typing with conditional operators](#target-typing-with-conditional-operators)
+    - [Covariant returns](#covariant-returns)
 - [Feature and Implementation Examples](#feature-and-implementation-examples)
   - [AsyncSocketServerExample](#asyncsocketserverexample)
   - [NamedPipesExample](#namedpipesexample)
@@ -157,6 +161,58 @@ Pattern matching allows you to simplify scenarios where you need to cohesively m
                 Animal a => 200.00m,
                 _ => throw new ArgumentException("no idea")
             };
+```
+
+### Improved target typing
+
+Target typing is what C# uses in expressions for getting a type from it's context. A common example is use of the `var` keyword.
+
+The improved target typing in C# 9 comes in two flavors: new expressions and target-typing `??` and `?:`
+
+#### Target-typed new expressions
+
+```c#
+public Person(string firstName, string lastName)
+{
+        _firstName = firstName;
+        _lastName = lastName;
+}
+///
+Person person = new ("Tony", "Stark");
+///
+var personList = new List<Person>
+{
+    new ("Tony", "Stark"),
+    new ("Howard", "Stark"),
+    new ("Clint", "Barton")
+};
+```
+
+#### Target typing with conditional operators
+
+```c#
+// Person is base of Student and Superhero
+Student student = new Student ("Dave", "Brock", "Programming");
+Superhero hero = new Superhero ("Tony", "Stark", "10000");
+Person anotherPerson = student ?? hero;
+```
+
+#### Covariant returns
+
+With return type covariance, you can override a base class method (that has a less-specific type) with one that returns a more specific type.
+
+```c#
+public virtual Person GetPerson()
+{
+    // this is the parent (or base) class
+    return new Person();
+}
+
+public override Student GetPerson()
+{
+    // derived class
+    return new Student();
+}
 ```
 
 ---
