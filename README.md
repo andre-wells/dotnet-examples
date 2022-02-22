@@ -17,6 +17,8 @@
 
 ## C Sharp Language Features
 
+Credit to [Dave Brock](https://www.daveabrock.com/2020/07/06/c-sharp-9-pattern-matching/)
+
 ### The `init` Accessor
 
 Previously, for object initialization to work, the properties must be mutable.
