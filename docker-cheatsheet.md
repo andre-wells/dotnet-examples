@@ -18,8 +18,15 @@ Show list of all containers, even if they're not running\
 Run a Docker container\
 `docker run hello-docker`
 
-Run the `ubuntu` Docker container in interactice mode\
+Run the `ubuntu` Docker container in interactive mode\
 `docker run -it ubuntu`
 
 # Linux Commands
 
+Show our currnet shell program\
+`echo $0`
+
+Maintain packages with `apt` (advanced package tool)\
+`apt list` to show packages\
+`apt update` to update list of available packages
+`apt install [name]` to install a package. It might not be in the list so `apt update` might be needed first.
