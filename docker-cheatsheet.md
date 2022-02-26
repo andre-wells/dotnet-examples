@@ -15,7 +15,7 @@ Show list of containers\
 Show list of all containers, even if they're not running\
 `docker ps -a`
 
-Run a Docker container\
+Run a Docker container (`run` starts a new container. For existing containers, see `start`)\
 `docker run hello-docker`
 
 Run the `ubuntu` Docker container in interactive mode\
@@ -25,6 +25,24 @@ Run the `ubuntu` Docker container in interactive mode\
 
 Show our currnet shell program\
 `echo $0`
+
+Print our current working directory: `pwd`
+
+Listing contents of the working directory
+- `ls` lists contents, typically on multiple lines
+- `ls -1` lists contents in a one item per line
+- `ls -l` long listing, incuding permissions
+
+Managing directories (and files)
+- `mkdir` to make a directory
+- `mv` to "rename/move" a directory/file
+- `rm` to remove a file.  To remove a directory, you might need `-r` for the recursive remove.
+
+Managing files
+- `touch` to interact with files.
+- `touch file1.txt. file2.txt` can make multiple files.
+
+
 
 Maintain packages with `apt` (advanced package tool)\
 `apt list` to show packages\
