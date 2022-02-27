@@ -42,6 +42,7 @@ Managing files
 - `touch` to interact with files.
 - `touch file1.txt. file2.txt` can make multiple files.
 - `cat` to concatenate, which is outputting the file's contents to the terminal. Good for small files.
+  - Can also direct output to another file, like `cat file1.txt file2.txt`
 - `more` to show the file contents in a way we can scroll.
   - Press Space to show next page. Press Enter to go line by line down. Press Q to exit.
 - Install and use `less` to scroll up and down a file, much more interactive than `more`
