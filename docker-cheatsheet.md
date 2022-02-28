@@ -21,6 +21,9 @@ Run a Docker container (`run` starts a new container. For existing containers, s
 Run the `ubuntu` Docker container in interactive mode\
 `docker run -it ubuntu`
 
+Execute a command on the container (`it` means interactive)
+`docker exec -it [container] bash`
+
 # Linux Commands
 
 Show our currnet shell program\
